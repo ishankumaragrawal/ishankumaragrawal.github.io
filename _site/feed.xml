@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    
+    <title>Ishan Kumar</title>
+    
+    
+    <link>http://localhost:4001/</link>
+    <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml" />
+    
+    
+      <item>
+        <title>Continuous Diffusion Models for NLP</title>
+        <description>
+          
+          Recently there have been many works applying diffusion models to NLP domain, they majorly take two approaches, either they alter the diffusion process a little to make the noising and denoising steps possible for discrete data, or the second approach is to convert the discrete text data into a continuous...
+        </description>
+        <pubDate>Wed, 18 Jan 2023 00:00:00 +0000</pubDate>
+        <link>http://localhost:4001/2023-01-18-ContinousDiffusionModelsForNLP/</link>
+        <guid isPermaLink="true">http://localhost:4001/2023-01-18-ContinousDiffusionModelsForNLP/</guid>
+      </item>
+    
+      <item>
+        <title>Machine Translation using PyTorch Ignite</title>
+        <description>
+          
+          This tutorial is a brief introduction on how you can train a machine translation model (or any other seq2seq model) using PyTorch Ignite. This notebook uses Models, Dataset and Tokenizers from Huggingface, hence they can be easily replaced by other models from the 🤗 Hub. Further, it allows you to...
+        </description>
+        <pubDate>Thu, 21 Oct 2021 00:00:00 +0000</pubDate>
+        <link>http://localhost:4001/2021-10-21-MT_Using_Ignite/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021-10-21-MT_Using_Ignite/</guid>
+      </item>
+    
+      <item>
+        <title>Skin Segmentation in Images</title>
+        <description>
+          This posts explains various ways through which you can segment out the color of the skin from the rest of the image. - 
+          Skin Segmentation can be a important aspect of pre-processing data for Deep Learning Models. It can be used whenever you are making a model which works on Hands, Faces etc. Unlike segmentation in other tasks (like this or this ) here it can be done without using a huge DL...
+        </description>
+        <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+        <link>http://localhost:4001/2021-03-07-Skin-Color-Segmentation-Methods/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021-03-07-Skin-Color-Segmentation-Methods/</guid>
+      </item>
+    
+      <item>
+        <title>BART and MBART</title>
+        <description>
+          Transformers for seq2seq tasks - 
+          BART Paper - BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension In a Single line it is a seq2seq Tranformer (thus much more generalised form of BERT and GPT) and is trained in a Denoising Autoencoder Manner (similar to BERT’s Masked Language model). Through this work it...
+        </description>
+        <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+        <link>http://localhost:4001/2021-03-07-BART-and-MBART/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021-03-07-BART-and-MBART/</guid>
+      </item>
+    
+  </channel>
+</rss>
