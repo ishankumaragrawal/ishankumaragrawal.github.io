@@ -17,17 +17,17 @@ navbar-links:
   About Me: "index"
   Blogs : "blogs"
   Projects : "projects"
-  CV : "https://drive.google.com/file/d/1blumBDOwNgp87Va5S1jMW_g2uJhjUfTv/view?usp=sharing"
+  CV : "https://drive.google.com/file/d/1vD-C8QeKKAWkvuJ_VayBQb3ujNokTUaj/view?usp=sharing"
   Courses : "courses"
 
 # --- Logo --- #
 
 # Image to show in the navigation bar - works best with a square image
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/assets/img/photo_ishan.png"
+avatar: "/assets/img/LinkedinDP.jpg"
 
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
-round-avatar: true
+round-avatar: false
 
 # If you want to have an image logo in the top-left corner instead of having the title of the website,
 # then specify the following parameter
