@@ -8,9 +8,8 @@ tags: ["Deep Learning", "PyTorch"]
 thumbnail-img: /assets/img/work/ai4sg.png
 share-img: /assets/img/work/ai4sg.png
 comments: true
-dated: Feb 2021 - May 2021
 dated: 2021-02-01
-category: latest
+category: older
 ---
 
 <img src="/assets/img/work/ai4sg.png" width="800">

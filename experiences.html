@@ -30,19 +30,28 @@ subtitle: Work experiences that have helped shape my interests in Machine Learni
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  gap: 1em;
+}
+
+.experience-title-container {
+  flex: 1;
+  min-width: 0;
 }
 
 .experience-title {
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 0.2em;
+  word-wrap: break-word;
 }
 
 .experience-meta {
   font-size: 0.9em;
   color: #666;
+  white-space: nowrap;
   text-align: right;
+  flex-shrink: 0;
 }
 
 .tag {
@@ -62,9 +71,11 @@ subtitle: Work experiences that have helped shape my interests in Machine Learni
   <img src="/assets/images/logos/jpmorgan.png" alt="JPMorgan Logo" class="experience-logo" />
   <div class="experience-content">
     <div class="experience-header">
-      <div class="experience-title">
-        Applied Science Intern @ JP Morgan ML Center of Excellence
-        <span class="tag">Intern</span>
+      <div class="experience-title-container">
+        <div class="experience-title">
+          Applied Science Intern @ JP Morgan ML Center of Excellence
+          <span class="tag">Intern</span>
+        </div>
       </div>
       <div class="experience-meta">
         Seattle, WA<br />
@@ -83,9 +94,11 @@ subtitle: Work experiences that have helped shape my interests in Machine Learni
   <img src="/assets/images/logos/microsoft.png" alt="Microsoft Logo" class="experience-logo" />
   <div class="experience-content">
     <div class="experience-header">
-      <div class="experience-title">
-        Data & Applied Scientist @ Microsoft
-        <span class="tag">Full-Time</span>
+      <div class="experience-title-container">
+        <div class="experience-title">
+          Data & Applied Scientist @ Microsoft
+          <span class="tag">Full-Time</span>
+        </div>
       </div>
       <div class="experience-meta">
         Hyderabad, India<br />
@@ -106,9 +119,11 @@ subtitle: Work experiences that have helped shape my interests in Machine Learni
   <img src="/assets/images/logos/eth-mpi.png" alt="ETH & MPI Logo" class="experience-logo" />
   <div class="experience-content">
     <div class="experience-header">
-      <div class="experience-title">
-        Student Researcher @ ETH Zurich & MPI Tübingen
-        <span class="tag">Part-Time</span>
+      <div class="experience-title-container">
+        <div class="experience-title">
+          Student Researcher @ ETH Zurich & MPI Tübingen
+          <span class="tag">Part-Time</span>
+        </div>
       </div>
       <div class="experience-meta">
         Germany<br />
@@ -129,9 +144,11 @@ subtitle: Work experiences that have helped shape my interests in Machine Learni
   <img src="/assets/images/logos/deloitte.png" alt="Deloitte Logo" class="experience-logo" />
   <div class="experience-content">
     <div class="experience-header">
-      <div class="experience-title">
-        ML Engineering Intern @ Deloitte AI Center of Excellence
-        <span class="tag">Intern</span>
+      <div class="experience-title-container">
+        <div class="experience-title">
+          ML Engineering Intern @ Deloitte AI Center of Excellence
+          <span class="tag">Intern</span>
+        </div>
       </div>
       <div class="experience-meta">
         Hyderabad, India<br />
@@ -150,9 +167,11 @@ subtitle: Work experiences that have helped shape my interests in Machine Learni
   <img src="/assets/images/logos/zomato.png" alt="Zomato Logo" class="experience-logo" />
   <div class="experience-content">
     <div class="experience-header">
-      <div class="experience-title">
-        ML Engineering Intern @ Zomato
-        <span class="tag">Intern</span>
+      <div class="experience-title-container">
+        <div class="experience-title">
+          ML Engineering Intern @ Zomato
+          <span class="tag">Intern</span>
+        </div>
       </div>
       <div class="experience-meta">
         Gurgaon, India<br />
@@ -171,9 +190,11 @@ subtitle: Work experiences that have helped shape my interests in Machine Learni
   <img src="/assets/images/logos/iisc.png" alt="IISc Logo" class="experience-logo" />
   <div class="experience-content">
     <div class="experience-header">
-      <div class="experience-title">
-        Research Intern @ Video Analytics Lab, IISc Bangalore
-        <span class="tag">Intern</span>
+      <div class="experience-title-container">
+        <div class="experience-title">
+          Research Intern @ Video Analytics Lab, IISc Bangalore
+          <span class="tag">Intern</span>
+        </div>
       </div>
       <div class="experience-meta">
         Bangalore, India<br />
@@ -193,9 +214,11 @@ subtitle: Work experiences that have helped shape my interests in Machine Learni
   <img src="/assets/images/logos/iitkgp.png" alt="IIT Kharagpur Logo" class="experience-logo" />
   <div class="experience-content">
     <div class="experience-header">
-      <div class="experience-title">
-        Research Intern @ Complex Networks Research Group, IIT Kharagpur
-        <span class="tag">Intern</span>
+      <div class="experience-title-container">
+        <div class="experience-title">
+          Research Intern @ Complex Networks Research Group, IIT Kharagpur
+          <span class="tag">Intern</span>
+        </div>
       </div>
       <div class="experience-meta">
         India<br />
