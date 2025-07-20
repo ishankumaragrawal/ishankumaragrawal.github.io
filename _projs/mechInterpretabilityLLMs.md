@@ -10,7 +10,8 @@ share-img:
 comments: true
 gh-repo: memesoo99/LLM_interpretability
 gh-badge: [follow]
-dated: Sep 2025 - Dec 2025
+dated: 2025-02-01
+category: older
 ---
 <div class="row justify-content-sm-center">
   <div class="col-sm-8 mt-3 mt-md-0">

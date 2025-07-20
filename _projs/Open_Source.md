@@ -7,7 +7,8 @@ thumbnail-img: /assets/img/d2l_pytorch.png
 share-img: /assets/img/d2l_pytorch.png
 comments: true
 gh-badge: [follow]
-dated:
+dated: 2023-02-01
+category: older
 ---
 <img style="float: right;" src="/assets/img/work/ignite_logo.png" width=300>
 <br>
