@@ -13,13 +13,22 @@ dated: Feb 2021 - May 2021
 
 <img src="/assets/img/work/ai4sg.png" width="800">
 
-Through this work our aim was to create a model which is able to predict COVID-19 related fake news in multiple languages without any need for COVID specific parallel data. <br>
-Current methods of doing this involve using large models like BART, instead we wanted to have a model which is much smaller in size, therefore has the ability to do fast inference (even on a smartphone).
+Objective of this work:
+<p>Created a model which is able to predict COVID-19 related fake news in multiple languages without any need for COVID specific parallel data. <br />
+Have a model which is much smaller in size, therefore has the ability to do fast inference (even on a smartphone).</p>
 
-In this project we demonstrate a way of training an extremely small BERT model (mini BERT) using labels from a larger model (Sentence BERT) using Knowledge Distillation
-method. Doing this allows us to train the model to have a shared embedding space between languages and also learn the rich semantics of a larger SBERT model, which are very effective in sentence level classification tasks.
 
-Since the model has very few parameters, it is very fast during inference and can be useful for running on browser, smaller devices.
+Approach
+Finetuned a smaller architecture (1) BERT model (L=4, H=512) using labels from a larger model (Sentence BERT) using Knowledge Distillation
+Ensured (2)shared embedding space between languages and (3)also learn the rich semantics of a larger SBERT model, which are very effective in sentence level classification tasks.</p>
+
+Results
+- Because of (1) that we had a much faster inference time: 93.7% reduction (0.495 sec to 0.031 sec)
+- Because of (2) the accuracy in hindi was increased by ~35% (0.63 -> 0.845)
+- Because of (3) we got a side benefit - accuracy in english was increased by ~6%
+
 
 This work got accepted in the <b>AI4SG Workshop</b> in <b>IJCAI 2021</b>
+
+Slides - https://docs.google.com/presentation/d/1GNdTsntJjyAI1lX052_lIkPFLJ2UemTUjUgVrq-eGws/edit#slide=id.p1
 
