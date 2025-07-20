@@ -10,7 +10,6 @@ comments: true
 
 gh-repo: dsgiitr/d2l-pytorch
 gh-badge: [follow,star]
-dated: May 2019 - June 2019
 dated: 2019-05-01
 category: older
 ---

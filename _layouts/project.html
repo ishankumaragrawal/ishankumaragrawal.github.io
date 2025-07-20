@@ -4,31 +4,9 @@ layout: page
 
 {{ content }}
 
-
-
-<!--
-{% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
-  {% include page__hero.html %}
-{% elsif page.header.video.id and page.header.video.provider %}
-  {% include page__hero_video.html %}
-{% endif %}
-
-<div id="main" role="main">
-  <article class="splash" itemscope itemtype="https://schema.org/CreativeWork">
-    {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
-    {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
-
-    <section class="page__content" itemprop="text">
-      {{ content }}
-    </section>
-  </article>
-</div>
-
--->
-
-
+{% assign sorted_posts = site.projs | sort: "dated" | reverse %}
+{% assign latest_projects = sorted_posts | reject: "category", "older" %}
+{% assign older_projects = sorted_posts | where: "category", "older" %}
 
 <h2>Latest Projects</h2>
 <div class="posts-list">
@@ -40,12 +18,14 @@ layout: page
         <h5 class="post-subtitle-2">{{ post.description }}</h5>
       {% endif %}
     </a>
-    <p class="post-meta">{{ post.dated }}</p>
+    <p class="post-meta">
+      {{ post.dated }}
+    </p>
   </article>
   {% endfor %}
 </div>
 
-<h2>Older Projects</h2>
+<h2>Older Projects from Undergrad</h2>
 <div class="posts-list">
   {% for post in older_projects %}
   <article class="post-preview">
@@ -55,25 +35,9 @@ layout: page
         <h5 class="post-subtitle-2">{{ post.description }}</h5>
       {% endif %}
     </a>
-    <p class="post-meta">{{ post.dated }}</p>
+    <p class="post-meta">
+      {{ post.dated }}
+    </p>
   </article>
   {% endfor %}
 </div>
-
-
-
-
-{% if paginator.total_pages > 1 %}
-<ul class="pagination main-pager">
-  {% if paginator.previous_page %}
-  <li class="page-item previous">
-    <a class="page-link" href="{{ paginator.previous_page_path | absolute_url }}">&larr; Newer Posts</a>
-  </li>
-  {% endif %}
-  {% if paginator.next_page %}
-  <li class="page-item next">
-    <a class="page-link" href="{{ paginator.next_page_path | absolute_url }}">Older Posts &rarr;</a>
-  </li>
-  {% endif %}
-</ul>
-{% endif %}
