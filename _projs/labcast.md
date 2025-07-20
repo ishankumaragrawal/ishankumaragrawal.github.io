@@ -10,7 +10,8 @@ share-img:
 comments: true
 # gh-repo: Ishan-Kumar2/Molecular_VAE_Pytorch
 gh-badge: [follow]
-dated: Feb 2025 - May 2025
+dated: 2025-02-01
+category: new
 ---
 
 <div class="row justify-content-sm-center">
