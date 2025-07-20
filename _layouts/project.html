@@ -4,40 +4,84 @@ layout: page
 
 {{ content }}
 
-{% assign sorted_posts = site.projs | sort: "dated" | reverse %}
-{% assign latest_projects = sorted_posts | reject: "category", "older" %}
-{% assign older_projects = sorted_posts | where: "category", "older" %}
+{% assign posts = site.projs %}
 
-<h2>Latest Projects</h2>
 <div class="posts-list">
-  {% for post in latest_projects %}
+  {% for post in posts %}
+  
   <article class="post-preview">
+    {%- capture thumbnail -%}
+      {% if post.thumbnail-img %}
+        {{ post.thumbnail-img }}
+      {% elsif post.cover-img %}
+        {% if post.cover-img.first %}
+          {{ post.cover-img[0].first.first }}
+        {% else %}
+          {{ post.cover-img }}
+        {% endif %}
+      {% else %}
+      {% endif %}
+    {% endcapture %}
+    {% assign thumbnail=thumbnail | strip %}
+
+    {% if site.feed_show_excerpt == false %}
+    {% if thumbnail != "" %}
+    <div class="post-image post-image-normal">
+      <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
+        <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
+      </a>
+    </div>
+    {% endif %}
+    {% endif %}
+
     <a href="{{ post.url | absolute_url }}">
-      <h3 class="post-title-2">{{ post.title }}</h3>
-      {% if post.description %}
-        <h5 class="post-subtitle-2">{{ post.description }}</h5>
+      <h2 class="post-title">{{ post.title }}</h2>
+
+      {% if post.subtitle %}
+        <h3 class="post-subtitle">
+        {{ post.subtitle }}
+        </h3>
       {% endif %}
     </a>
-    <p class="post-meta">
-      {{ post.dated }}
-    </p>
-  </article>
-  {% endfor %}
-</div>
 
-<h2>Older Projects from Undergrad</h2>
-<div class="posts-list">
-  {% for post in older_projects %}
-  <article class="post-preview">
-    <a href="{{ post.url | absolute_url }}">
-      <h3 class="post-title-2">{{ post.title }}</h3>
-      {% if post.description %}
-        <h5 class="post-subtitle-2">{{ post.description }}</h5>
-      {% endif %}
-    </a>
     <p class="post-meta">
-      {{ post.dated }}
+      {% assign date_format = site.date_format | default: "%B %-d, %Y" %}
+      Posted on {{ post.date | date: date_format }}
     </p>
-  </article>
+
+    {% if thumbnail != "" %}
+    <div class="post-image post-image-small">
+      <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
+        <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
+      </a>
+    </div>
+    {% endif %}
+
+    {% unless site.feed_show_excerpt == false %}
+    {% if thumbnail != "" %}
+    <div class="post-image post-image-short">
+      <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
+        <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
+      </a>
+    </div>
+    {% endif %}
+
+    
+    {% endunless %}
   {% endfor %}
-</div>
+
+{% if paginator.total_pages > 1 %}
+<ul class="pagination main-pager">
+  {% if paginator.previous_page %}
+  <li class="page-item previous">
+    <a class="page-link" href="{{ paginator.previous_page_path | absolute_url }}">&larr; Newer Posts</a>
+  </li>
+  {% endif %}
+  {% if paginator.next_page %}
+  <li class="page-item next">
+    <a class="page-link" href="{{ paginator.next_page_path | absolute_url }}">Olffder Posts &rarr;</a>
+  </li>
+  {% endif %}
+</ul>
+{% endif %}
+
