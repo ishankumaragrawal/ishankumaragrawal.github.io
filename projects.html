@@ -11,46 +11,68 @@ subtitle: ...
 </center>
 <br>
 
-<!--
-{% assign posts = site.projs %}
-hello
+{% assign recent_posts = site.projs | where: "category", "new" | sort: "dated" | reverse %}
+{% assign older_posts = site.projs | where: "category", "older" | sort: "dated" | reverse %}
+
+{% if recent_posts.size > 0 %}
+<h2 style="text-transform: none; margin-bottom: 30px;">Recent Projects</h2>
 <div class="posts-list">
-  {% for post in posts %}
-  	
+  {% for post in recent_posts %}
 	<div class="container-fluid alert alert-success">
 	        <div class="section-heading">
-	            <h3  style="text-transform: none;" >{{ post.title }}</h3>
-	            <h6  style="text-transform: none;" >{{ post.description }}</h6>
-	            
+	            <h3 style="text-transform: none;" >{{ post.title }}</h3>
+	            <h6 style="text-transform: none;" >{{ post.description }}</h6>
 	        </div>
 	        <div class="row">
-
-	        	<ul>
 	            <div class="col-xs-12 col-sm-4 col-md-3">
-	                <!--<figure class="fadeInLeft" data-wow-duration="500ms" data-wow-delay="{{ $delay }}ms">
-	                    
-	                        <img src="{{ post.share-img }}" alt="this is a title">
-	                        <div class="overlay">
-	                            
-	                            <div class="buttons">
-
-	                            	<a class="page-link" href="{{ post.github }}">&larr; Github</a>
-  									
-	                                
-	                                <a class="page-link" href="{{ post.url  }}">&larr; Details</a>
-  									
-	                                <a href="{{ post.github }}" data-inline="true">Github</a>
-	                                <a href="{{ post.url }}"  data-inline="true">Details</a>
-	                            </div>
+	                {% if post.share-img %}
+	                <figure class="fadeInLeft" data-wow-duration="500ms">
+	                    <img src="{{ post.share-img }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;">
+	                    <div class="overlay">
+	                        <div class="buttons">
+	                            {% if post.github %}
+	                            <a class="page-link" href="{{ post.github }}">Github</a>
+	                            {% endif %}
+	                            <a class="page-link" href="{{ post.url }}">Details</a>
 	                        </div>
-	                    
-
-	                
+	                    </div>
+	                </figure>
+	                {% endif %}
 	            </div>
-	        </ul>
-	            
 	        </div>
 	    </div>
-	    
-	    {% endfor %}
+	{% endfor %}
+</div>
+{% endif %}
+
+{% if older_posts.size > 0 %}
+<h2 style="text-transform: none; margin-top: 50px; margin-bottom: 30px;">Older Projects</h2>
+<div class="posts-list">
+  {% for post in older_posts %}
+	<div class="container-fluid alert alert-success">
+	        <div class="section-heading">
+	            <h3 style="text-transform: none;" >{{ post.title }}</h3>
+	            <h6 style="text-transform: none;" >{{ post.description }}</h6>
+	        </div>
+	        <div class="row">
+	            <div class="col-xs-12 col-sm-4 col-md-3">
+	                {% if post.share-img %}
+	                <figure class="fadeInLeft" data-wow-duration="500ms">
+	                    <img src="{{ post.share-img }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;">
+	                    <div class="overlay">
+	                        <div class="buttons">
+	                            {% if post.github %}
+	                            <a class="page-link" href="{{ post.github }}">Github</a>
+	                            {% endif %}
+	                            <a class="page-link" href="{{ post.url }}">Details</a>
+	                        </div>
+	                    </div>
+	                </figure>
+	                {% endif %}
+	            </div>
+	        </div>
+	    </div>
+	{% endfor %}
+</div>
+{% endif %}
 </p>
