@@ -1,78 +1,63 @@
 ---
-layout: project
-title: Projects
-subtitle: ...
+layout: page
 ---
-<link rel="shortcut icon" type="image/png" sizes="16x16" href="/favicons/favicon-2.png">
 
-<p>
-<center>Some of the projects I have built while exploring new stuff.
-	Click on them to find out more.
-</center>
-<br>
+<div id="main" role="main">
+  <article class="splash" itemscope itemtype="https://schema.org/CreativeWork">
+    {% if page.title %}
+      <meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">
+    {% endif %}
+    <section class="page__content" itemprop="text">
+      {{ content }}
+    </section>
+  </article>
+</div>
 
-{% assign recent_posts = site.projs | where: "category", "new" | sort: "dated" | reverse %}
-{% assign older_posts = site.projs | where: "category", "older" | sort: "dated" | reverse %}
-
-{% if recent_posts.size > 0 %}
-<h2 style="text-transform: none; margin-bottom: 30px;">Recent Projects</h2>
+<!-- Recent Projects Section -->
+<h2>Recent Projects</h2>
 <div class="posts-list">
+  {% assign recent_posts = site.projs | where: "category", "new" | sort: "dated" | reverse %}
   {% for post in recent_posts %}
-	<div class="container-fluid alert alert-success">
-	        <div class="section-heading">
-	            <h3 style="text-transform: none;" >{{ post.title }}</h3>
-	            <h6 style="text-transform: none;" >{{ post.description }}</h6>
-	        </div>
-	        <div class="row">
-	            <div class="col-xs-12 col-sm-4 col-md-3">
-	                {% if post.share-img %}
-	                <figure class="fadeInLeft" data-wow-duration="500ms">
-	                    <img src="{{ post.share-img }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;">
-	                    <div class="overlay">
-	                        <div class="buttons">
-	                            {% if post.github %}
-	                            <a class="page-link" href="{{ post.github }}">Github</a>
-	                            {% endif %}
-	                            <a class="page-link" href="{{ post.url }}">Details</a>
-	                        </div>
-	                    </div>
-	                </figure>
-	                {% endif %}
-	            </div>
-	        </div>
-	    </div>
-	{% endfor %}
+    <article class="post-preview">
+      <a href="{{ post.url | absolute_url }}">
+        <h3 class="post-title-2">{{ post.title }}</h3>
+        {% if post.description %}
+          <h5 class="post-subtitle-2">{{ post.description }}</h5>
+        {% endif %}
+      </a>
+      <p class="post-meta">{{ post.dated }}</p>
+    </article>
+  {% endfor %}
 </div>
-{% endif %}
 
-{% if older_posts.size > 0 %}
-<h2 style="text-transform: none; margin-top: 50px; margin-bottom: 30px;">Older Projects</h2>
+<!-- Older Projects Section -->
+<h2 style="margin-top: 3em;">Older Projects (from Undergraduate)</h2>
 <div class="posts-list">
+  {% assign older_posts = site.projs | where: "category", "older" | sort: "dated" | reverse %}
   {% for post in older_posts %}
-	<div class="container-fluid alert alert-success">
-	        <div class="section-heading">
-	            <h3 style="text-transform: none;" >{{ post.title }}</h3>
-	            <h6 style="text-transform: none;" >{{ post.description }}</h6>
-	        </div>
-	        <div class="row">
-	            <div class="col-xs-12 col-sm-4 col-md-3">
-	                {% if post.share-img %}
-	                <figure class="fadeInLeft" data-wow-duration="500ms">
-	                    <img src="{{ post.share-img }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;">
-	                    <div class="overlay">
-	                        <div class="buttons">
-	                            {% if post.github %}
-	                            <a class="page-link" href="{{ post.github }}">Github</a>
-	                            {% endif %}
-	                            <a class="page-link" href="{{ post.url }}">Details</a>
-	                        </div>
-	                    </div>
-	                </figure>
-	                {% endif %}
-	            </div>
-	        </div>
-	    </div>
-	{% endfor %}
+    <article class="post-preview">
+      <a href="{{ post.url | absolute_url }}">
+        <h3 class="post-title-2">{{ post.title }}</h3>
+        {% if post.description %}
+          <h5 class="post-subtitle-2">{{ post.description }}</h5>
+        {% endif %}
+      </a>
+      <p class="post-meta">{{ post.dated }}</p>
+    </article>
+  {% endfor %}
 </div>
+
+{% if paginator.total_pages > 1 %}
+  <ul class="pagination main-pager">
+    {% if paginator.previous_page %}
+      <li class="page-item previous">
+        <a class="page-link" href="{{ paginator.previous_page_path | absolute_url }}">&larr; Newer Posts</a>
+      </li>
+    {% endif %}
+    {% if paginator.next_page %}
+      <li class="page-item next">
+        <a class="page-link" href="{{ paginator.next_page_path | absolute_url }}">Older Posts &rarr;</a>
+      </li>
+    {% endif %}
+  </ul>
 {% endif %}
-</p>
