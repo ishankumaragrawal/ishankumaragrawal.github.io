@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Number Sequences Test — Benchmarking Pattern Induction in LLMs</title>
+  <meta name="description" content="A clean, self‑contained landing page for the Number Sequences Test dataset. Includes examples, schema, and usage notes for benchmarking LLMs on numerical pattern induction." />
+  <meta property="og:title" content="Number Sequences Test" />
+  <meta property="og:description" content="Benchmark LLMs on number series pattern induction. Includes examples, schema, and dataset link." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://huggingface.co/datasets/Ishank/number-series-problems" />
+  <meta name="theme-color" content="#111827" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%93%8E%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #0f172a;
+      --panel-2: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --brand: #60a5fa;
+      --accent: #34d399;
+      --ring: rgba(96,165,250,.35);
+      --code-bg: #0b1020;
+      --code-border: #1f2a44;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --panel: #ffffff;
+        --panel-2: #f1f5f9;
+        --text: #0f172a;
+        --muted: #475569;
+        --brand: #2563eb;
+        --accent: #059669;
+        --ring: rgba(37,99,235,.2);
+        --code-bg: #f8fafc;
+        --code-border: #e2e8f0;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: linear-gradient(180deg, var(--bg), var(--panel-2));
+      color: var(--text);
+    }
+    .container { max-width: 1050px; margin: 0 auto; padding: 40px 20px 96px; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(10px);
+      background: color-mix(in oklab, var(--bg) 75%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+    }
+    .topbar { max-width: 1050px; margin: 0 auto; padding: 12px 20px; display:flex; align-items:center; gap:16px; }
+    .logo {
+      width: 40px; height: 40px; display:grid; place-items:center;
+      border-radius: 12px; background: var(--panel);
+      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+      box-shadow: 0 6px 24px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.03);
+      font-weight: 800; letter-spacing: -0.02em; color: var(--brand);
+    }
+    .title { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 18px 0 10px; }
+    .lead { font-size: clamp(16px, 2vw, 18px); color: var(--muted); max-width: 60ch; }
+
+    .hero { display:grid; gap: 24px; grid-template-columns: 1.2fr .8fr; align-items:center; margin-top: 28px; }
+    @media (max-width: 900px){ .hero { grid-template-columns: 1fr; } }
+
+    .card {
+      background: linear-gradient(180deg, var(--panel), color-mix(in oklab, var(--panel-2) 40%, var(--panel)));
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      border-radius: 22px; padding: 24px; box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    }
+    .cta-row { display:flex; gap:12px; flex-wrap: wrap; margin-top: 14px; }
+    .btn {
+      display:inline-flex; align-items:center; gap:10px; padding: 10px 14px; border-radius: 12px;
+      border: 1px solid color-mix(in oklab, var(--brand) 40%, transparent);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--brand) 12%, var(--panel)), var(--panel));
+      color: var(--text); text-decoration:none; font-weight: 600;
+      box-shadow: 0 8px 20px rgba(37,99,235,.25);
+    }
+    .btn.secondary { border-color: color-mix(in oklab, var(--text) 14%, transparent); background: var(--panel); box-shadow:none; }
+    .btn:hover { outline: 3px solid var(--ring); }
+
+    .grid { display:grid; gap: 18px; grid-template-columns: repeat(12, 1fr); }
+    .col-7 { grid-column: span 7; } .col-5 { grid-column: span 5; }
+    @media (max-width: 900px){ .col-7, .col-5 { grid-column: 1 / -1; } }
+
+    h2 { font-size: clamp(22px, 2.4vw, 28px); margin: 0 0 10px; letter-spacing: -0.01em; }
+    h3 { font-size: 18px; margin: 10px 0 8px; }
+    p { margin: 8px 0 14px; }
+    ul { margin: 6px 0 14px 20px; }
+    code, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: .95em; }
+    pre { background: var(--code-bg); border: 1px solid var(--code-border); padding: 14px 16px; border-radius: 14px; overflow:auto; }
+
+    .pill { display:inline-block; padding: 4px 10px; border-radius: 999px; border: 1px solid color-mix(in oklab, var(--text) 15%, transparent); font-size: 12px; color: var(--muted); }
+    .kpi { display:flex; gap: 16px; flex-wrap: wrap; }
+    .kpi .item { padding: 12px 14px; border-radius: 14px; background: var(--panel); border: 1px solid color-mix(in oklab, var(--text) 12%, transparent); min-width: 140px; text-align:center; }
+    .muted { color: var(--muted); }
+
+    .footer { margin-top: 40px; padding-top: 24px; border-top: 1px dashed color-mix(in oklab, var(--text) 12%, transparent); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    .copy-btn {
+      border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+      background: var(--panel);
+      padding: 6px 10px; border-radius: 10px; cursor: pointer; font-weight: 600; color: var(--text);
+    }
+    .code-block { position: relative; }
+    .code-actions { position: absolute; top: 8px; right: 8px; display:flex; gap:8px; }
+  </style>
+  <script>
+    function copyFrom(selector) {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = el.parentElement.querySelector('.copy-btn');
+        if (btn) { const old = btn.textContent; btn.textContent = 'Copied!'; setTimeout(()=>btn.textContent=old, 1200); }
+      })
+    }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Number Sequences Test",
+    "url": "https://huggingface.co/datasets/Ishank/number-series-problems",
+    "description": "A dataset of number series problems for evaluating LLMs on pattern induction, with ground-truth next term and templated explanations.",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "creator": [{"@type": "Person", "name": "Ishan"}],
+    "keywords": ["number series", "LLM evaluation", "reasoning", "patterns", "sequence"],
+    "isAccessibleForFree": true
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="logo" aria-hidden="true">NS</div>
+      <span class="pill" title="Task">Number Pattern Induction</span>
+      <span class="pill" title="Domain">LLM Benchmark</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero grid">
+      <div class="col-7">
+        <h1 class="title">Number Sequences Test</h1>
+        <p class="lead">A compact benchmark to test how well language models can infer patterns from number series. Each row provides a <strong>sequence</strong>, the ground‑truth <strong>next_term</strong>, and a templated <strong>explanation</strong> of the rule. Series span <em>AP</em>, <em>GP</em>, <em>powers</em>, and <em>alternating rules</em>.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://huggingface.co/datasets/Ishank/number-series-problems" target="_blank" rel="noopener">View on Hugging Face</a>
+          <a class="btn secondary" href="#schema">Jump to Schema</a>
+        </div>
+      </div>
+      <aside class="col-5 card">
+        <h2 style="margin-top:0">Quick Examples</h2>
+        <div class="code-block">
+          <div class="code-actions"><button class="copy-btn" onclick="copyFrom('#ex1')" aria-label="Copy example 1">Copy</button></div>
+          <pre id="ex1"><code>6, 11, 16, 21, 26, 31 → <strong>36</strong>
+Rule: Arithmetic progression with first term 6 and common difference 5.</code></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-actions"><button class="copy-btn" onclick="copyFrom('#ex2')" aria-label="Copy example 2">Copy</button></div>
+          <pre id="ex2"><code>5, 10, 20, 40, 80 → <strong>160</strong>
+Rule: Geometric progression with common ratio 2.</code></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-actions"><button class="copy-btn" onclick="copyFrom('#ex3')" aria-label="Copy example 3">Copy</button></div>
+          <pre id="ex3"><code>5, 11, 33, 39, 117 → <strong>123</strong>
+Rule: Alternating +6 and ×3.</code></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-actions"><button class="copy-btn" onclick="copyFrom('#ex4')" aria-label="Copy example 4">Copy</button></div>
+          <pre id="ex4"><code>2, 4, 8, 64, 68, 4624 → <strong>4628</strong>
+Rule: Alternating +4 and squaring ( ^2 ).</code></pre>
+        </div>
+        <p class="muted" style="margin-top:6px">Use these to sanity‑check model reasoning chains.</p>
+      </aside>
+    </section>
+
+    <section class="card" id="overview" style="margin-top:24px">
+      <h2>Overview</h2>
+      <p>The dataset mixes <strong>simple</strong> progressions (AP/GP) with <strong>composed</strong> patterns (alternating addition/multiplication/powers). Explanations are auto‑generated by a Python script via template filling, ensuring consistent phrasing. This makes it ideal for evaluating:</p>
+      <ul>
+        <li>Pattern discovery and rule induction from short contexts</li>
+        <li>Arithmetic reasoning and chain‑of‑thought validation</li>
+        <li>Robustness across single‑rule vs. alternating‑rule sequences</li>
+      </ul>
+      <div class="kpi">
+        <div class="item"><div class="muted">Tasks</div><div><strong>Next‑term prediction</strong></div></div>
+        <div class="item"><div class="muted">Series types</div><div><strong>AP · GP · Powers · Alternating</strong></div></div>
+        <div class="item"><div class="muted">License</div><div><strong>CC‑BY 4.0</strong></div></div>
+      </div>
+    </section>
+
+    <section class="grid" id="schema" style="margin-top:24px">
+      <div class="col-7">
+        <div class="card">
+          <h2>Dataset Schema</h2>
+          <p>Each row is a single problem with its ground truth.</p>
+          <ul>
+            <li><code>sequence</code> — Array of 5–6 integers composing the series.</li>
+            <li><code>next_term</code> — Integer ground truth next value.</li>
+            <li><code>explanation</code> — Human‑readable rule description (templated).</li>
+            <li><code>type</code> — One of <code>general</code> (AP/GP/Power) or <code>alternating</code>.</li>
+          </ul>
+
+          <h3>Example Row</h3>
+          <div class="code-block">
+            <div class="code-actions"><button class="copy-btn" onclick="copyFrom('#row')">Copy</button></div>
+            <pre id="row"><code>{
+  "sequence": [5, 11, 33, 39, 117],
+  "next_term": 123,
+  "explanation": "Alternating between +6 and ×3.",
+  "type": "alternating"
+}</code></pre>
+          </div>
+
+          <h3>Series Categories</h3>
+          <ul>
+            <li><strong>AP</strong> (Arithmetic Progression): constant difference <code>d</code>.</li>
+            <li><strong>GP</strong> (Geometric Progression): constant ratio <code>r</code>.</li>
+            <li><strong>Powers</strong>: exponentiation‑based patterns (e.g., squares, cubes).</li>
+            <li><strong>Alternating</strong>: two rules alternated, e.g., <code>+k</code> ↔ <code>×r</code>, or <code>+k</code> ↔ <code>^2</code>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-5">
+        <div class="card">
+          <h2>Intended Use</h2>
+          <ul>
+            <li>Evaluate LLM reasoning on numerical pattern induction.</li>
+            <li>Test explanations: does the model articulate the correct rule?</li>
+            <li>Curriculum‑style training or unit tests for math agents.</li>
+          </ul>
+          <h3>Non‑Goals</h3>
+          <ul>
+            <li>Not a full curriculum of all number theory topics.</li>
+            <li>Not a replacement for broad math benchmarks.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="usage" style="margin-top:24px">
+      <h2>Usage Snippets</h2>
+      <p>Load with the <a href="https://huggingface.co/docs/datasets" target="_blank" rel="noopener">🤗 Datasets</a> library and iterate over items. Evaluate your model by predicting <code>next_term</code> and—optionally—generating a textual explanation.</p>
+
+      <h3>Python</h3>
+      <div class="code-block">
+        <div class="code-actions"><button class="copy-btn" onclick="copyFrom('#py')">Copy</button></div>
+        <pre id="py"><code>from datasets import load_dataset
+
+ds = load_dataset("Ishank/number-series-problems")
+for ex in ds["train"]:
+    seq = ex["sequence"]
+    truth = ex["next_term"]
+    explanation = ex["explanation"]
+    # your_model.predict(seq) → compare with truth
+</code></pre>
+      </div>
+
+      <h3>Evaluation Idea</h3>
+      <ul>
+        <li><strong>Accuracy</strong>: exact match on <code>next_term</code>.</li>
+        <li><strong>Rule Consistency</strong>: check if the model’s free‑form explanation matches the templated rule (keyword match or regex).</li>
+        <li><strong>Type Breakdown</strong>: report separate scores for <code>general</code> vs <code>alternating</code>.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="credit" style="margin-top:24px">
+      <h2>Attribution & License</h2>
+      <p>Dataset by <strong>Ishan</strong>. If you use this in academic or industrial work, please link to the dataset page and credit the author.</p>
+      <ul>
+        <li>License: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></li>
+        <li>Dataset: <a href="https://huggingface.co/datasets/Ishank/number-series-problems" target="_blank" rel="noopener">Ishank/number-series-problems</a></li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <div class="muted">© <span id="year"></span> Number Sequences Test</div>
+      <div class="muted">Made for benchmarking LLM reasoning on pattern induction.</div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
